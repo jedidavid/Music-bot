@@ -4,7 +4,7 @@ module.exports = {
   app: {
     px: "!",
     token: `${process.env.DISCORD_TOKEN}`,
-    playing: "Listening to 🎵",
+    playing: "to 🎵",
   },
 
   opt: {
