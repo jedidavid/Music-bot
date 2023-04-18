@@ -1,16 +1,23 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     name: 'skip',
-    aliases: ['sk'],
-    utilisation: '{prefix}skip',
+    description: 'skip the track',
     voiceChannel: true,
 
-    execute(client, message) {
-        const queue = player.getQueue(message.guild.id);
+    execute({ inter }) {
+        const queue = player.nodes.get(inter.guildId);
 
-        if (!queue || !queue.playing) return message.channel.send(`No music currently playing ${message.author}... try again ? ❌`);
+         if (!queue || !queue.isPlaying()) return inter.editReply({ content:`No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
 
-        const success = queue.skip();
+        const success = queue.node.skip();
 
-        return message.channel.send(success ? `Current music ${queue.current.title} skipped ✅` : `Something went wrong ${message.author}... try again ? ❌`);
+        const SkipEmbed = new EmbedBuilder()
+        .setColor('#2f3136')
+        .setAuthor({name: success ? `Current music ${queue.currentTrack.title} skipped ✅` : `Something went wrong ${inter.member}... try again ? ❌` })
+
+
+       return inter.editReply({ embeds: [SkipEmbed] });
+
     },
 };

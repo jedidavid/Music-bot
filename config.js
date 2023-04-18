@@ -2,31 +2,27 @@ require("dotenv").config();
 
 module.exports = {
   app: {
-    px: "!",
     token: `${process.env.DISCORD_TOKEN}`,
-    playing: "🎵",
+    playing: "🎵 @ /help",
+    global: true,
+    guild: "xxx",
+    ExtraMessages: false,
+    loopMessage: false,
   },
 
   opt: {
     DJ: {
       enabled: false,
-      roleName: "DJ",
-      commands: [
-        "back",
-        "clear",
-        "filter",
-        "loop",
-        "pause",
-        "resume",
-        "seek",
-        "shuffle",
-        "skip",
-        "stop",
-        "volume",
-      ],
+      roleName: "",
+      commands: [],
     },
     maxVol: 100,
-    loopMessage: false,
+    spotifyBridge: true,
+    volume: 100,
+    leaveOnEmpty: true,
+    leaveOnEmptyCooldown: 30000,
+    leaveOnEnd: true,
+    leaveOnEndCooldown: 30000,
     discordPlayer: {
       ytdlOptions: {
         quality: "highestaudio",
